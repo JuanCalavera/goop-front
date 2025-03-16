@@ -1,0 +1,117 @@
+<app-head></app-head>
+<main style="padding-top: 156px;">
+    <div class="container">
+        <div class="d-flex justify-content-between">
+            <h1>Pedidos</h1>
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createModal"><i
+                    class="bi bi-plus-circle-fill"></i> Criar um Pedido</button>
+
+            <div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Criar Novo</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <div class="mb-3">
+                                    <label for="cliente-create" class="form-label">Cliente</label>
+                                    <input type="text" name="client" class="form-control" id="cliente-create"
+                                        [(ngModel)]="client">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="total-create" class="form-label">Total</label>
+                                    <input type="number" name="total" class="form-control" id="total-create"
+                                        [(ngModel)]="total">
+                                </div>
+                                <input type="hidden" name="status" [(ngModel)]="status" value="Pendente">
+                                <div class="mb-3">
+                                    <p>Escolha os Itens:</p>
+                                    <select name="itens[]" class="form-select" multiple [(ngModel)]="itens">
+                                        <option selected>Selecione os Itens</option>
+                                        @for (item of itemsForPedidos; track item.id) {
+                                        <option value="{{item.id}}">{{item.product}}</option>
+                                        }
+                                    </select>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                            <button type="button" (click)="addPedidos()" class="btn btn-primary">Salvar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <table class="table my-5 table-striped table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Cliente</th>
+                    <th scope="col">Total do Pedido</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Data de Criação</th>
+                    <th scope="col" class="text-center">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @for (pedido of pedidos; track pedido.id) {
+                <tr>
+                    <td scope="row">{{pedido.id}}</td>
+                    <td>{{pedido.client}}</td>
+                    <td>{{pedido.total}}</td>
+                    <td>
+                        <p [class.text-success]="pedido.status === 'Processado'">{{pedido.status}}</p>
+                    </td>
+                    <td>{{pedido.created_at | date:'dd/MM/yyyy'}}</td>
+                    <td>
+                        <div class="text-center">
+                            @if(pedido.status === 'Pendente'){
+                            <button (click)="checkPedido(pedido)" class="btn btn-success btn-sm me-1"><i
+                                    class="bi bi-bag-check-fill"></i>
+                                Check</button>
+                            }
+                            @else {
+                            <button (click)="uncheckPedido(pedido)" class="btn btn-danger btn-sm me-1"><i
+                                    class="bi bi-bag-dash-fill"></i>
+                                UnCheck</button>
+                            }
+                        </div>
+                    </td>
+                </tr>
+                @if (pedido.itens && pedido.itens.length > 0) {
+                <tr>
+                    <td colspan="6">
+                        <table class="table table-striped mb-0">
+                            <tr>
+                                <td colspan="4"><b>Itens:</b></td>
+                            </tr>
+                            <tr>
+                                <td scope="row">#</td>
+                                <td>Produto</td>
+                                <td>Quantidade</td>
+                                <td>Preço</td>
+                            </tr>
+                            @for (item of pedido.itens; track item.id) {
+                            <tr>
+                                <td>{{item.id}}</td>
+                                <td>{{item.product}}</td>
+                                <td>{{item.quantity}}</td>
+                                <td>{{item.price | currency:'BRL'}}</td>
+                            </tr>
+                            }
+                        </table>
+                    </td>
+                </tr>
+                }
+                }
+
+            </tbody>
+        </table>
+    </div>
+</main>
+<app-footer></app-footer>
