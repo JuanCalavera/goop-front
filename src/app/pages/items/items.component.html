@@ -1,0 +1,67 @@
+<app-head></app-head>
+<main style="padding-top: 156px;">
+    <div class="container">
+        <div class="d-flex justify-content-between">
+            <h1>Itens</h1>
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createModal"><i
+                    class="bi bi-plus-circle-fill"></i> Criar um Item</button>
+        </div>
+
+        <div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Criar Novo</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="mb-3">
+                                <label for="cliente-create" class="form-label">Produto</label>
+                                <input type="text" name="product" class="form-control" id="product-create"
+                                    [(ngModel)]="product">
+                            </div>
+                            <div class="mb-3">
+                                <label for="total-create" class="form-label">Quantidade</label>
+                                <input type="number" name="quantity" class="form-control" id="quantity-create"
+                                    [(ngModel)]="quantity">
+                            </div>
+                            <div class="mb-3">
+                                <label for="total-create" class="form-label">Preço R$</label>
+                                <input type="number" name="price" class="form-control" id="price-create"
+                                    [(ngModel)]="price">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                        <button type="button" (click)="addItems()" class="btn btn-primary">Salvar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <table class="table my-5 table-striped table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Produto</th>
+                    <th scope="col">Quantidade</th>
+                    <th scope="col">Valor</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (item of items; track item.id) {
+                <tr>
+                    <td scope="row">{{item.id}}</td>
+                    <td>{{item.product}}</td>
+                    <td>{{item.quantity}}</td>
+                    <td>{{item.price}}</td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</main>
+
+<app-footer></app-footer>
