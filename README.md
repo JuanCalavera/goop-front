@@ -2,10 +2,13 @@
 
 Para a criação deste projeto foi usado:
 
-Angular CLI: 19.2.3
-Node: 22.12.0
-Package Manager: npm 10.9.0
-Angular: 19.2.2
+- Angular CLI: 19.2.3
+
+- Node: 22.12.0
+
+- Package Manager: npm 10.9.0
+
+- Angular: 19.2.2
 
 **Obs: Antes de iniciar este projeto inicie o backend encontrado no dist-goop**
 
