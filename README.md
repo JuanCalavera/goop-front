@@ -10,7 +10,7 @@ Para a criação deste projeto foi usado:
 
 - Angular: 19.2.2
 
-**Obs: Antes de iniciar este projeto inicie o backend encontrado no dist-goop**
+**Obs: Antes de iniciar este projeto inicie o backend encontrado no repositório [Goop-Back](https://github.com/JuanCalavera/goop-back)**
 
 Para iniciar este projeto vá até o caminho raíz do projeto no seu terminal e inicie as instalações de dependencias:
 
